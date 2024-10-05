@@ -1,9 +1,14 @@
 import React, { useContext } from 'react';
 import userContext from './context/UserContext';
 const Fetch = () => {
-    const { users } = useContext(userContext); // users is an array
+    const { users , userdelete } = useContext(userContext); // users is an array
     console.log(users);
     console.log(users)
+
+    const handledelete =(id)=>{
+        userdelete(id);
+    }
+
     return (
         <>
             <div className="container">
@@ -31,7 +36,7 @@ const Fetch = () => {
                                     <td>
                                         {item.address.street}, {item.address.suite}, {item.address.city}, {item.address.zipcode}
                                     </td>
-                                    <td> a<button className='btn btn-danger'>Delete</button></td>
+                                    <td><button  onClick={() => handledelete(item.id)} className='btn btn-danger'>Delete</button></td>
                                 </tr>
                             ))}
                         </tbody>

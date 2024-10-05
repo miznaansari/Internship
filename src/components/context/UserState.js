@@ -11,6 +11,24 @@ const UserState = (props) => {
         } )
     }, []);
 
+    const userdelete = async (id) => {
+        try {
+            const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+                method: 'DELETE',
+            });
+    
+            if (response.ok) {
+                console.log('User deleted successfully');
+                // Optionally, update the state to remove the user from the UI
+                setusers(prevUsers => prevUsers.filter(user => user.id !== id));
+            } else {
+                console.log('Error deleting user');
+            }
+        } catch (error) {
+            console.log('Error:', error.message);
+        }
+    };
+
     const addUser = async(name,email,username,address)=>{
         const userData = {
             name,
@@ -38,7 +56,7 @@ const UserState = (props) => {
         }
     }
     return (
-        <UserContext.Provider value={{ users,addUser}}>
+        <UserContext.Provider value={{ users,addUser,userdelete}}>
             {props.children}
         </UserContext.Provider>
     );
