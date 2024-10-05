@@ -11,6 +11,37 @@ const UserState = (props) => {
         } )
     }, []);
 
+    const updateuser= async (id, update)=>{
+        try {
+            const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body:JSON.stringify(update)
+            });
+            const updatedUsers = users.map(user => 
+                user.id === id ? update : user
+            );
+            console.log(updatedUsers)
+            setusers(updatedUsers); 
+            if (response.ok) {
+                console.log('User updated successfully');
+                const users = users.map(user => 
+                    user.id === id ? 'match ho gaya' : 'match nahi hua'
+                );
+                console.log('User updated successfullzdgsdy');
+                console.log(users + update);
+    
+                // Update the state with the new user list
+                setusers(users); // Assuming `setUsers` is your state updater for users
+            } 
+
+        } catch (error) {
+            
+        }
+    }
+
     const userdelete = async (id) => {
         try {
             const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
@@ -56,7 +87,7 @@ const UserState = (props) => {
         }
     }
     return (
-        <UserContext.Provider value={{ users,addUser,userdelete}}>
+        <UserContext.Provider value={{ users,addUser,userdelete ,updateuser}}>
             {props.children}
         </UserContext.Provider>
     );
