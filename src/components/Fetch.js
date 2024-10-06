@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import UserContext from './context/UserContext';
 import Username from './Username';
-const Fetch = () => {
+const Fetch = (props) => {
     const { addUser, updateuser } = useContext(UserContext); // Get addUser from context
     const [update, setUpdate] = useState({
         id: '',
@@ -29,15 +29,18 @@ const Fetch = () => {
                 zipcode: singleitem.address.zipcode || ''
             }
         })
+      
     }
     const handleUpdateOk = (e) => {
         e.preventDefault();
         updateuser(update.id, update);
         console.log(update.id)
+        props.showalert('Your Data updated successfully','success');
     }
 
     const handledelete = (id) => {
         userdelete(id);
+        props.showalert('Your Data deleted successfully','danger');
     }
 
     return (

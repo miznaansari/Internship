@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import UserContext from './context/UserContext';
 
-const Create = () => {
+const Create = (props) => {
     const { addUser } = useContext(UserContext); // Get addUser from context
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
@@ -16,6 +16,7 @@ const Create = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         addUser(name,username,email,address);
+        props.showalert('Your Data inserted successfully','success');
        
     };
 
