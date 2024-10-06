@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react';
 import UserContext from './context/UserContext';
 import Username from './Username';
+import { ColorRing } from 'react-loader-spinner';
 const Fetch = (props) => {
-    const {  updateuser } = useContext(UserContext); // Get addUser from context
+    const { updateuser } = useContext(UserContext); // Get addUser from context
     const [update, setUpdate] = useState({
         id: '',
         uname: '',
@@ -29,18 +30,18 @@ const Fetch = (props) => {
                 zipcode: singleitem.address.zipcode || ''
             }
         })
-      
+
     }
     const handleUpdateOk = (e) => {
         e.preventDefault();
         updateuser(update.id, update);
         console.log(update.id)
-        props.showalert('Your Data updated successfully','success');
+        props.showalert('Your Data updated successfully', 'success');
     }
 
     const handledelete = (id) => {
         userdelete(id);
-        props.showalert('Your Data deleted successfully','danger');
+        props.showalert('Your Data deleted successfully', 'danger');
     }
 
     return (
@@ -104,7 +105,7 @@ const Fetch = (props) => {
                                                     ...update.address, // Spread the existing address properties
                                                     street: e.target.value // Update only the suite field
                                                 }
-                                            })}  id="address-street"
+                                            })} id="address-street"
                                         />
                                     </div>
                                     <div className="mb-3 col-4">
@@ -170,10 +171,8 @@ const Fetch = (props) => {
                 </div>
             </div>
 
-            {/* normal form */}
-            <div className="container">
-                {/* {users[0]} */}
-            </div>
+            {/* Table */}
+       
             <div className='container'>
                 <div className="table-responsive">
                     <table className="table">
@@ -189,9 +188,25 @@ const Fetch = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {users.map((item) => (
-                                <Username key={item.id} item={item} handledelete={handledelete} handleupdate={handleupdate} />
-                            ))}
+                            {users.length > 0 ? (
+                                users.map((item) => (
+                                    <Username key={item.id} item={item} handledelete={handledelete} handleupdate={handleupdate} />
+                                ))
+                            ) :
+                                (<div>
+                                    <ColorRing
+                                        visible={true}
+                                        height="80"
+                                        width="80"
+                                        ariaLabel="color-ring-loading"
+                                        wrapperStyle={{}}
+                                        wrapperClass="color-ring-wrapper"
+                                        colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+                                    />
+                                </div>
+
+                                )}
+
                         </tbody>
                     </table>
                 </div>
