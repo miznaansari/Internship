@@ -14,9 +14,9 @@ function App() {
       msg: a,
       type: b
     })
-    setInterval(() => {
+    setTimeout(() => {
       setalert(null)
-    }, 5000);
+    }, 3000);
   }
   return (
     <>

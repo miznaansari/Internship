@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import UserContext from './context/UserContext';
 import Username from './Username';
 const Fetch = (props) => {
-    const { addUser, updateuser } = useContext(UserContext); // Get addUser from context
+    const {  updateuser } = useContext(UserContext); // Get addUser from context
     const [update, setUpdate] = useState({
         id: '',
         uname: '',
