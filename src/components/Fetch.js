@@ -196,8 +196,8 @@ const Fetch = (props) => {
                                 (<div>
                                     <ColorRing
                                         visible={true}
-                                        height="80"
-                                        width="80"
+                                        height="120"
+                                        width="100%"
                                         ariaLabel="color-ring-loading"
                                         wrapperStyle={{}}
                                         wrapperClass="color-ring-wrapper"
